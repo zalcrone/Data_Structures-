@@ -99,7 +99,7 @@ class stacks
         {   cout<<"RESULT IS:"<<endl;
         while(ptr!=NULL)
          {
-            cout<<ptr->data<<"";
+            cout<<ptr->data;
             ptr=ptr->next;
         }
         }
