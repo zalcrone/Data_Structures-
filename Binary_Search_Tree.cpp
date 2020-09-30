@@ -1,4 +1,5 @@
 #include<iostream>
+
 using namespace std;
 
 class TreeNode
@@ -85,13 +86,17 @@ class BST
             }
         }
     }
-    void Print2D(TreeNode* new_node)
+    void PrintPreOrder(TreeNode* r)
     {
-        if(new_node==root)
+        if(r==NULL)
         {
-            for
+            return;
         }
+        cout<<r->data<<" ";
+        PrintPreOrder(r->left);
+        PrintPreOrder(r->right);
     }
+    
     
     
 
@@ -106,7 +111,7 @@ int main()
     {
      cout<<"What option do you want to perform?\nSelect the option. Enter 0 to exit"<<endl;
      cout<<"1.Inserting"<<endl;
-     cout<<"2.Print2D"<<endl;
+     cout<<"2.Printing Pre Order"<<endl;
      
      
      cin>>option;
@@ -124,6 +129,20 @@ int main()
         obj.InsertNode(new_node);
         cout<<endl;
         break;
+        
+        case 2:
+        cout<<"PreOrder representation is:";
+        obj.PrintPreOrder(obj.root);
+        
+        
+        cout<<endl;
+        
+        
+        default:
+        cout<<"Enter Proper Option Number"<<endl;
+        
+        
+        
         
        
      }
