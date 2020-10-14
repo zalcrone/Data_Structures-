@@ -149,7 +149,54 @@ class BST
         }
         
     }
-    
+    TreeNode* minValueNode(TreeNode* node)
+    {
+        TreeNode* current = node;
+        while(current->left!=NULL)
+        {
+            current = current->left;  
+        }
+        return current;
+    }
+    TreeNode * deleteNode(TreeNode * r, int v) {
+    // base case 
+    if (r == NULL) {
+      return NULL;
+    }
+    // If the key to be deleted is smaller than the root's key, 
+    // then it lies in left subtree 
+    else if (v < r -> data) {
+      r -> left = deleteNode(r -> left, v);
+    }
+    // If the key to be deleted is greater than the root's key, 
+    // then it lies in right subtree 
+    else if (v > r -> data) {
+      r -> right = deleteNode(r -> right, v);
+    }
+    // if key is same as root's key, then This is the node to be deleted 
+    else {
+      // node with only one child or no child 
+      if (r -> left == NULL) {
+        TreeNode * temp = r -> right;
+        delete r;
+        return temp;
+      } else if (r -> right == NULL) {
+        TreeNode * temp = r -> left;
+        delete r;
+        return temp;
+      } else {
+        // node with two children: Get the inorder successor (smallest 
+        // in the right subtree) 
+        TreeNode * temp = minValueNode(r -> right);
+        // Copy the inorder successor's content to this node 
+        r -> data = temp -> data;
+        // Delete the inorder successor 
+        r -> right = deleteNode(r -> right, temp->data);
+        //deleteNode(r->right, temp->value); 
+      }
+    }
+    return r;
+  }
     
     
 
@@ -168,11 +215,12 @@ int main()
      cout<<"3.Print In Order"<<endl;
      cout<<"4.Print Post Order"<<endl;
      cout<<"5.IterativeSearch"<<endl;
+     cout<<"6.DeleteNode"<<endl;
      
      
      cin>>option;
-    TreeNode* new_node = new TreeNode();
-    switch(option)
+     TreeNode* new_node = new TreeNode();
+     switch(option)
      {
         case 0:
         break;
@@ -218,7 +266,26 @@ int main()
             cout<<"Value Not Found"<<endl;
         }
         break;
-       
+        
+        
+        
+        case 6:
+        cout<<"DeleteNode operation called"<<endl;
+        cout<<"Enter the Value of the Node you want to Delete"<<endl;
+        cin>>dat;
+        new_node = obj.iterativeSearch(dat);
+        if(new_node!=NULL)
+        {
+            obj.deleteNode(obj.root, dat);
+            cout<<"Value Deleted"<<endl;
+        }
+        else
+        {
+            cout<<"Value Not Found"<<endl;
+        }
+        break;
+        
+        
        default:
        cout<<"Enter Proper Option Number"<<endl;
        break;
@@ -229,3 +296,4 @@ int main()
     return 0;
     
 }
+
