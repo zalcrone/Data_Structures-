@@ -197,6 +197,27 @@ class BST
     }
     return r;
   }
+  int height(TreeNode* r)
+  {
+      if(r==NULL)
+      {
+          return  -1;
+      }
+      else
+      {
+          int lheight = height(r->left);
+          int rheight = height(r->right);
+          if(lheight>rheight)
+          {
+              return (lheight+1);
+          }
+          else
+          {
+              return (rheight+1);
+          }
+      }
+      
+  }
     
     
 
@@ -216,6 +237,7 @@ int main()
      cout<<"4.Print Post Order"<<endl;
      cout<<"5.IterativeSearch"<<endl;
      cout<<"6.DeleteNode"<<endl;
+     cout<<"7.Height of the Tree"<<endl;
      
      
      cin>>option;
@@ -285,7 +307,8 @@ int main()
         }
         break;
         
-        
+        case 7:
+        cout<<"Height of the Tree:"<<obj.height(obj.root)<<endl;
        default:
        cout<<"Enter Proper Option Number"<<endl;
        break;
